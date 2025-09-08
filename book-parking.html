@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Vehicle Parking - Book Parking</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://images.seeklogo.com/logo-png/36/2/daffodil-international-university-logo-png_seeklogo-361757.png" alt="DIU Logo" class="nav-diu-logo">
+                <div class="nav-logo-text">
+                    <span class="nav-title">DIU Vehicle Parking</span>
+                    <span class="nav-subtitle">Smart Parking System</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="find-parking.html" class="nav-link">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Find Parking
+                </a>
+                <a href="book-parking.html" class="nav-link active">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Parking
+                </a>
+                <a href="history.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    History
+                </a>
+                <a href="payments.html" class="nav-link">
+                    <i class="fas fa-credit-card"></i>
+                    Payments
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </div>
+            
+            <div class="nav-user">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40x40/1a4b84/ffffff?text=U" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sahik</span>
+                        <span class="user-role">Student</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1><i class="fas fa-calendar-plus"></i> Book Parking Spot</h1>
+                <p>Select your preferred parking spot and time slot</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="booking-container">
+            <div class="booking-form">
+                <div class="form-section">
+                    <h3><i class="fas fa-car"></i> Vehicle Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vehicle Number</label>
+                            <input type="text" value="DH-5678-9012" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle Type</label>
+                            <input type="text" value="Car" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Parking Zone Selection</h3>
+                    <div class="zone-selection">
+                        <div class="zone-option active" data-zone="A">
+                            <div class="zone-header">
+                                <h4>Zone A - Main Campus</h4>
+                                <span class="zone-status available">12 spots available</span>
+                            </div>
+                            <div class="zone-details">
+                                <span><i class="fas fa-car"></i> Car Parking</span>
+                                <span><i class="fas fa-money-bill"></i> ৳20/hour</span>
+                                <span><i class="fas fa-clock"></i> 24/7 Access</span>
+                            </div>
+                        </div>
+                        
+                        <div class="zone-option" data-zone="B">
+                            <div class="zone-header">
+                                <h4>Zone B - Motorcycle</h4>
+                                <span class="zone-status available">8 spots available</span>
+                            </div>
+                            <div class="zone-details">
+                                <span><i class="fas fa-motorcycle"></i> Motorcycle Only</span>
+                                <span><i class="fas fa-money-bill"></i> ৳10/hour</span>
+                                <span><i class="fas fa-clock"></i> 24/7 Access</span>
+                            </div>
+                        </div>
+                        
+                        <div class="zone-option" data-zone="C">
+                            <div class="zone-header">
+                                <h4>Zone C - Staff</h4>
+                                <span class="zone-status limited">3 spots available</span>
+                            </div>
+                            <div class="zone-details">
+                                <span><i class="fas fa-car"></i> Car Parking</span>
+                                <span><i class="fas fa-money-bill"></i> ৳25/hour</span>
+                                <span><i class="fas fa-clock"></i> 24/7 Access</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-calendar"></i> Date & Time Selection</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="parking-date" min="">
+                        </div>
+                        <div class="form-group">
+                            <label>Start Time</label>
+                            <input type="time" id="start-time">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <select id="duration">
+                                <option value="1">1 Hour</option>
+                                <option value="2">2 Hours</option>
+                                <option value="4">4 Hours</option>
+                                <option value="8">8 Hours</option>
+                                <option value="24">24 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-credit-card"></i> Payment & Confirmation</h3>
+                    <div class="payment-summary">
+                        <div class="summary-item">
+                            <span>Zone Rate:</span>
+                            <span id="zone-rate">৳20/hour</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Duration:</span>
+                            <span id="duration-display">1 Hour</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Amount:</span>
+                            <span id="total-amount">৳20</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Final Amount:</span>
+                            <span id="final-amount">৳20</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="wallet" checked>
+                            <span class="checkmark"></span>
+                            <i class="fas fa-wallet"></i>
+                            Wallet Balance (৳150)
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card">
+                            <span class="checkmark"></span>
+                            <i class="fas fa-credit-card"></i>
+                            Credit/Debit Card
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-secondary" onclick="history.back()">Cancel</button>
+                    <button class="btn-primary" onclick="confirmBooking()">
+                        <i class="fas fa-check"></i>
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
+
+            <!-- Available Spots Preview -->
+            <div class="spots-preview">
+                <div class="preview-header">
+                    <h3><i class="fas fa-eye"></i> Available Spots Preview</h3>
+                    <button class="refresh-btn" onclick="refreshSpots()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                
+                <div class="spots-grid-preview">
+                    <div class="spot-preview available" data-spot="A1">
+                        <div class="spot-number">A1</div>
+                        <div class="spot-status">Available</div>
+                    </div>
+                    <div class="spot-preview available" data-spot="A2">
+                        <div class="spot-number">A2</div>
+                        <div class="spot-status">Available</div>
+                    </div>
+                    <div class="spot-preview occupied" data-spot="A3">
+                        <div class="spot-number">A3</div>
+                        <div class="spot-status">Occupied</div>
+                    </div>
+                    <div class="spot-preview available" data-spot="A4">
+                        <div class="spot-number">A4</div>
+                        <div class="spot-status">Available</div>
+                    </div>
+                    <div class="spot-preview available" data-spot="A5">
+                        <div class="spot-number">A5</div>
+                        <div class="spot-status">Available</div>
+                    </div>
+                    <div class="spot-preview available" data-spot="A6">
+                        <div class="spot-number">A6</div>
+                        <div class="spot-status">Available</div>
+                    </div>
+                </div>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-color available"></span>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color occupied"></span>
+                        <span>Occupied</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color selected"></span>
+                        <span>Selected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 DIU Vehicle Parking System. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        document.getElementById('parking-date').min = new Date().toISOString().split('T')[0];
+        
+        // Set default time to current time + 1 hour
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+        document.getElementById('start-time').value = now.toTimeString().slice(0, 5);
+
+        // Zone selection
+        document.querySelectorAll('.zone-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.zone-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                updateZoneRate();
+            });
+        });
+
+        // Duration change
+        document.getElementById('duration').addEventListener('change', function() {
+            updateTotalAmount();
+        });
+
+        // Update zone rate and total
+        function updateZoneRate() {
+            const activeZone = document.querySelector('.zone-option.active');
+            const zone = activeZone.dataset.zone;
+            let rate = 20;
+            
+            if (zone === 'B') rate = 10;
+            else if (zone === 'C') rate = 25;
+            
+            document.getElementById('zone-rate').textContent = `৳${rate}/hour`;
+            updateTotalAmount();
+        }
+
+        function updateTotalAmount() {
+            const rate = parseInt(document.getElementById('zone-rate').textContent.replace('৳', '').replace('/hour', ''));
+            const duration = parseInt(document.getElementById('duration').value);
+            const total = rate * duration;
+            
+            document.getElementById('duration-display').textContent = `${duration} Hour${duration > 1 ? 's' : ''}`;
+            document.getElementById('total-amount').textContent = `৳${total}`;
+            document.getElementById('final-amount').textContent = `৳${total}`;
+        }
+
+        // Spot selection
+        document.querySelectorAll('.spot-preview.available').forEach(spot => {
+            spot.addEventListener('click', function() {
+                document.querySelectorAll('.spot-preview').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Refresh spots
+        function refreshSpots() {
+            const refreshBtn = document.querySelector('.refresh-btn i');
+            refreshBtn.classList.add('fa-spin');
+            
+            setTimeout(() => {
+                refreshBtn.classList.remove('fa-spin');
+                // Here you would typically fetch updated data
+            }, 1000);
+        }
+
+        // Confirm booking
+        function confirmBooking() {
+            const selectedSpot = document.querySelector('.spot-preview.selected');
+            const selectedZone = document.querySelector('.zone-option.active');
+            const date = document.getElementById('parking-date').value;
+            const time = document.getElementById('start-time').value;
+            const duration = document.getElementById('duration').value;
+            
+            if (!selectedSpot || !date || !time) {
+                alert('Please select a spot, date, and time');
+                return;
+            }
+            
+            if (confirm(`Confirm booking for ${selectedSpot.dataset.spot} on ${date} at ${time} for ${duration} hour(s)?`)) {
+                // Show loading state
+                const confirmBtn = document.querySelector('.btn-primary');
+                confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                confirmBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Booking confirmed! You will receive a confirmation email shortly.');
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize
+        updateZoneRate();
+    </script>
+</body>
+</html>

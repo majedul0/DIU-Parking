@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diu-Vehicle-Parking - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://images.seeklogo.com/logo-png/36/2/daffodil-international-university-logo-png_seeklogo-361757.png" alt="DIU Logo" class="nav-diu-logo">
+                <div class="nav-logo-text">
+                    <span class="nav-title">DIU Vehicle Parking</span>
+                    <span class="nav-subtitle">Smart Parking System</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="find-parking.html" class="nav-link">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Find Parking
+                </a>
+                <a href="book-parking.html" class="nav-link">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Parking
+                </a>
+                <a href="history.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    History
+                </a>
+                <a href="payments.html" class="nav-link">
+                    <i class="fas fa-credit-card"></i>
+                    Payments
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </div>
+            
+            <div class="nav-user">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=U" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sahik</span>
+                        <span class="user-role">Student</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <div class="welcome-content">
+                <h1>Welcome back, Sahik! 👋</h1>
+                <p>Here's what's happening with your parking today</p>
+                <div class="current-time" id="current-time"></div>
+            </div>
+            <div class="quick-actions">
+                <button class="btn-primary" onclick="window.location.href='book-parking.html'">
+                    <i class="fas fa-plus"></i>
+                    Book Parking
+                </button>
+                <button class="btn-secondary" onclick="window.location.href='find-parking.html'">
+                    <i class="fas fa-map-marked-alt"></i>
+                    View Map
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon available">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Available Spots</h3>
+                    <p class="stat-number">24</p>
+                    <span class="stat-change positive">+3 from yesterday</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon active">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Active Parking</h3>
+                    <p class="stat-number">2h 15m</p>
+                    <span class="stat-change">Zone A - Spot 12</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon total">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>This Month</h3>
+                    <p class="stat-number">18</p>
+                    <span class="stat-change">Parking sessions</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon balance">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Balance</h3>
+                                            <p class="stat-number">৳150</p>
+                        <span class="stat-change positive">+৳50 added today</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="dashboard-grid">
+            <!-- Available Parking Spots -->
+            <div class="dashboard-card parking-spots">
+                <div class="card-header">
+                    <h2><i class="fas fa-map-marker-alt"></i> Available Parking Spots</h2>
+                    <button class="refresh-btn" onclick="refreshSpots()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="spots-grid">
+                    <div class="spot-item available">
+                        <div class="spot-number">A1</div>
+                        <div class="spot-info">
+                            <span class="spot-type">Car</span>
+                            <span class="spot-rate">৳20/hr</span>
+                        </div>
+                        <button class="book-btn">Book</button>
+                    </div>
+                    <div class="spot-item available">
+                        <div class="spot-number">A2</div>
+                        <div class="spot-info">
+                            <span class="spot-type">Car</span>
+                            <span class="spot-rate">৳20/hr</span>
+                        </div>
+                        <button class="book-btn">Book</button>
+                    </div>
+                    <div class="spot-item available">
+                        <div class="spot-number">A3</div>
+                        <div class="spot-info">
+                            <span class="spot-type">Car</span>
+                            <span class="spot-rate">৳20/hr</span>
+                        </div>
+                        <button class="book-btn">Book</button>
+                    </div>
+                    <div class="spot-item occupied">
+                        <div class="spot-number">A4</div>
+                        <div class="spot-info">
+                            <span class="spot-type">Car</span>
+                            <span class="spot-status">Occupied</span>
+                        </div>
+                        <div class="occupied-time">1h 30m</div>
+                    </div>
+                    <div class="spot-item available">
+                        <div class="spot-number">B1</div>
+                        <div class="spot-info">
+                            <span class="spot-type">Motorcycle</span>
+                            <span class="spot-rate">৳10/hr</span>
+                        </div>
+                        <button class="book-btn">Book</button>
+                    </div>
+                    <div class="spot-item available">
+                        <div class="spot-number">B2</div>
+                        <div class="spot-info">
+                            <span class="spot-type">Motorcycle</span>
+                            <span class="spot-rate">৳10/hr</span>
+                        </div>
+                        <button class="book-btn">Book</button>
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="#" class="view-all-link">View All Spots <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card recent-activity">
+                <div class="card-header">
+                    <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon entry">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Parked at Zone A - Spot 12</h4>
+                            <p>Today at 9:30 AM</p>
+                        </div>
+                        <div class="activity-status">Active</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon exit">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Exited from Zone B - Spot 5</h4>
+                            <p>Yesterday at 6:45 PM</p>
+                        </div>
+                        <div class="activity-status">৳40</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon payment">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Payment received</h4>
+                            <p>Yesterday at 6:50 PM</p>
+                        </div>
+                        <div class="activity-status">৳40</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon booking">
+                            <i class="fas fa-calendar-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Booked Zone C - Spot 8</h4>
+                            <p>2 days ago at 2:15 PM</p>
+                        </div>
+                        <div class="activity-status">Completed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="dashboard-card quick-actions-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                </div>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="window.location.href='find-parking.html'">
+                        <i class="fas fa-search"></i>
+                        <span>Find Nearest Spot</span>
+                    </button>
+                    <button class="action-btn" onclick="extendParking()">
+                        <i class="fas fa-clock"></i>
+                        <span>Extend Parking</span>
+                    </button>
+                    <button class="action-btn" onclick="window.location.href='payments.html'">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Add Balance</span>
+                    </button>
+                    <button class="action-btn" onclick="downloadReceipt()">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Download Receipt</span>
+                    </button>
+                    <button class="action-btn" onclick="contactSupport()">
+                        <i class="fas fa-headset"></i>
+                        <span>Support</span>
+                    </button>
+                    <button class="action-btn" onclick="showParkingRules()">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Parking Rules</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Parking Zones Info -->
+            <div class="dashboard-card zones-info">
+                <div class="card-header">
+                    <h2><i class="fas fa-layer-group"></i> Parking Zones</h2>
+                </div>
+                <div class="zones-list">
+                    <div class="zone-item">
+                        <div class="zone-header">
+                            <h3>Zone A - Main Campus</h3>
+                            <span class="zone-status available">Available</span>
+                        </div>
+                        <div class="zone-stats">
+                            <span>12/20 spots free</span>
+                            <span>৳20/hour</span>
+                        </div>
+                        <div class="zone-description">
+                            Main campus parking near academic buildings
+                        </div>
+                    </div>
+                    
+                    <div class="zone-item">
+                        <div class="zone-header">
+                            <h3>Zone B - Motorcycle</h3>
+                            <span class="zone-status available">Available</span>
+                        </div>
+                        <div class="zone-stats">
+                            <span>8/15 spots free</span>
+                            <span>৳10/hour</span>
+                        </div>
+                        <div class="zone-description">
+                            Dedicated motorcycle parking area
+                        </div>
+                    </div>
+                    
+                    <div class="zone-item">
+                        <div class="zone-header">
+                            <h3>Zone C - Staff</h3>
+                            <span class="zone-status limited">Limited</span>
+                        </div>
+                        <div class="zone-stats">
+                            <span>3/10 spots free</span>
+                            <span>৳25/hour</span>
+                        </div>
+                        <div class="zone-description">
+                            Staff and faculty parking area
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Diu-Vehicle-Parking System. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: true,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            const dateString = now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            document.getElementById('current-time').innerHTML = `
+                <span class="time">${timeString}</span>
+                <span class="date">${dateString}</span>
+            `;
+        }
+
+        // Refresh parking spots
+        function refreshSpots() {
+            const refreshBtn = document.querySelector('.refresh-btn i');
+            refreshBtn.classList.add('fa-spin');
+            
+            setTimeout(() => {
+                refreshBtn.classList.remove('fa-spin');
+                // Here you would typically fetch updated data from the server
+            }, 1000);
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call
+
+        // Add click event to book buttons
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const spotNumber = this.parentElement.querySelector('.spot-number').textContent;
+                if (confirm(`Book parking spot ${spotNumber}?`)) {
+                    this.textContent = 'Booked';
+                    this.classList.add('booked');
+                    this.disabled = true;
+                }
+            });
+        });
+
+        // Add click event to action buttons
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.querySelector('span').textContent;
+                alert(`${action} feature will be implemented soon!`);
+            });
+        });
+
+        // Dashboard action functions
+        function extendParking() {
+            alert('Opening parking extension form...');
+        }
+
+        function downloadReceipt() {
+            alert('Downloading receipt...');
+        }
+
+        function contactSupport() {
+            alert('Opening support chat...');
+        }
+
+        function showParkingRules() {
+            alert('Opening parking rules...');
+        }
+    </script>
+</body>
+</html>

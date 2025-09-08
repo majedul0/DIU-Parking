@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Vehicle Parking - History</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://images.seeklogo.com/logo-png/36/2/daffodil-international-university-logo-png_seeklogo-361757.png" alt="DIU Logo" class="nav-diu-logo">
+                <div class="nav-logo-text">
+                    <span class="nav-title">DIU Vehicle Parking</span>
+                    <span class="nav-subtitle">Smart Parking System</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="find-parking.html" class="nav-link">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Find Parking
+                </a>
+                <a href="book-parking.html" class="nav-link">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Parking
+                </a>
+                <a href="history.html" class="nav-link active">
+                    <i class="fas fa-history"></i>
+                    History
+                </a>
+                <a href="payments.html" class="nav-link">
+                    <i class="fas fa-credit-card"></i>
+                    Payments
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </div>
+            
+            <div class="nav-user">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40x40/1a4b84/ffffff?text=U" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sahik</span>
+                        <span class="user-role">Student</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1><i class="fas fa-history"></i> Parking History</h1>
+                <p>View your complete parking records and receipts</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary" onclick="exportHistory()">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+                <button class="btn-primary" onclick="printHistory()">
+                    <i class="fas fa-print"></i>
+                    Print
+                </button>
+            </div>
+        </div>
+
+        <!-- History Stats -->
+        <div class="history-stats">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Total Sessions</h3>
+                    <p>156</p>
+                    <span>This year</span>
+                </div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Total Hours</h3>
+                    <p>487</p>
+                    <span>Parked time</span>
+                </div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-money-bill"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Total Spent</h3>
+                    <p>৳9,740</p>
+                    <span>This year</span>
+                </div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Average Rating</h3>
+                    <p>4.8</p>
+                    <span>Out of 5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Filters -->
+        <div class="history-filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Date Range:</label>
+                    <select id="date-filter">
+                        <option value="all">All Time</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Zone:</label>
+                    <select id="zone-filter">
+                        <option value="all">All Zones</option>
+                        <option value="A">Zone A - Main Campus</option>
+                        <option value="B">Zone B - Motorcycle</option>
+                        <option value="C">Zone C - Staff</option>
+                        <option value="D">Zone D - Visitor</option>
+                        <option value="E">Zone E - Library</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select id="status-filter">
+                        <option value="all">All Status</option>
+                        <option value="completed">Completed</option>
+                        <option value="active">Active</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                
+                <button class="btn-primary" onclick="applyHistoryFilters()">
+                    <i class="fas fa-filter"></i>
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- History Table -->
+        <div class="history-table-container">
+            <div class="table-header">
+                <h3><i class="fas fa-list"></i> Parking Records</h3>
+                <div class="table-actions">
+                    <button class="btn-secondary" onclick="selectAll()">
+                        <i class="fas fa-check-square"></i>
+                        Select All
+                    </button>
+                    <button class="btn-secondary" onclick="bulkDelete()">
+                        <i class="fas fa-trash"></i>
+                        Delete Selected
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="select-all"></th>
+                            <th>Date & Time</th>
+                            <th>Zone & Spot</th>
+                            <th>Duration</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <!-- History rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn" onclick="changePage('prev')">
+                <i class="fas fa-chevron-left"></i>
+                Previous
+            </button>
+            
+            <div class="page-numbers">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span>...</span>
+                <button class="page-btn">15</button>
+            </div>
+            
+            <button class="page-btn" onclick="changePage('next')">
+                Next
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions-section">
+            <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+            <div class="quick-actions-grid">
+                <button class="quick-action-btn" onclick="downloadReceipt()">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Download Receipt</span>
+                </button>
+                <button class="quick-action-btn" onclick="shareHistory()">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Share History</span>
+                </button>
+                <button class="quick-action-btn" onclick="contactSupport()">
+                    <i class="fas fa-headset"></i>
+                    <span>Contact Support</span>
+                </button>
+                <button class="quick-action-btn" onclick="reportIssue()">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Report Issue</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 DIU Vehicle Parking System. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample history data
+        const historyData = [
+            {
+                id: 1,
+                date: '2024-01-15',
+                time: '09:30 - 17:45',
+                zone: 'A',
+                spot: 'A12',
+                duration: '8h 15m',
+                amount: 165,
+                status: 'completed',
+                vehicle: 'DH-5678-9012'
+            },
+            {
+                id: 2,
+                date: '2024-01-14',
+                time: '14:20 - 18:30',
+                zone: 'B',
+                spot: 'B5',
+                duration: '4h 10m',
+                amount: 42,
+                status: 'completed',
+                vehicle: 'DH-5678-9012'
+            },
+            {
+                id: 3,
+                date: '2024-01-13',
+                time: '10:15 - 12:45',
+                zone: 'A',
+                spot: 'A8',
+                duration: '2h 30m',
+                amount: 50,
+                status: 'completed',
+                vehicle: 'DH-5678-9012'
+            },
+            {
+                id: 4,
+                date: '2024-01-12',
+                time: '09:00 - 16:00',
+                zone: 'C',
+                spot: 'C3',
+                duration: '7h 0m',
+                amount: 175,
+                status: 'completed',
+                vehicle: 'DH-5678-9012'
+            },
+            {
+                id: 5,
+                date: '2024-01-11',
+                time: '13:30 - 15:45',
+                zone: 'A',
+                spot: 'A15',
+                duration: '2h 15m',
+                amount: 45,
+                status: 'completed',
+                vehicle: 'DH-5678-9012'
+            },
+            {
+                id: 6,
+                date: '2024-01-10',
+                time: '08:45 - 17:30',
+                zone: 'A',
+                spot: 'A7',
+                duration: '8h 45m',
+                amount: 175,
+                status: 'completed',
+                vehicle: 'DH-5678-9012'
+            }
+        ];
+
+        // Initialize history table
+        function initializeHistory() {
+            const tbody = document.getElementById('history-tbody');
+            tbody.innerHTML = '';
+            
+            historyData.forEach(record => {
+                const row = createHistoryRow(record);
+                tbody.appendChild(row);
+            });
+        }
+
+        // Create history row
+        function createHistoryRow(record) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="checkbox" class="record-checkbox" value="${record.id}"></td>
+                <td>
+                    <div class="date-time">
+                        <div class="date">${formatDate(record.date)}</div>
+                        <div class="time">${record.time}</div>
+                    </div>
+                </td>
+                <td>
+                    <div class="zone-spot">
+                        <span class="zone">Zone ${record.zone}</span>
+                        <span class="spot">Spot ${record.spot}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="duration">
+                        <i class="fas fa-clock"></i>
+                        ${record.duration}
+                    </div>
+                </td>
+                <td>
+                    <div class="amount">
+                        <span class="currency">৳</span>${record.amount}
+                    </div>
+                </td>
+                <td>
+                    <span class="status ${record.status}">${record.status}</span>
+                </td>
+                <td>
+                    <div class="actions">
+                        <button class="action-btn" onclick="viewDetails(${record.id})" title="View Details">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn" onclick="downloadReceipt(${record.id})" title="Download Receipt">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="action-btn" onclick="shareRecord(${record.id})" title="Share">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            return row;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Apply history filters
+        function applyHistoryFilters() {
+            const dateFilter = document.getElementById('date-filter').value;
+            const zoneFilter = document.getElementById('zone-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            
+            console.log('Filters applied:', { dateFilter, zoneFilter, statusFilter });
+            alert('Filters applied! History updated.');
+        }
+
+        // Select all records
+        function selectAll() {
+            const selectAllCheckbox = document.getElementById('select-all');
+            const recordCheckboxes = document.querySelectorAll('.record-checkbox');
+            
+            recordCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
+        // Bulk delete
+        function bulkDelete() {
+            const selectedRecords = document.querySelectorAll('.record-checkbox:checked');
+            
+            if (selectedRecords.length === 0) {
+                alert('Please select records to delete');
+                return;
+            }
+            
+            if (confirm(`Delete ${selectedRecords.length} selected record(s)?`)) {
+                alert('Selected records deleted successfully!');
+                // Here you would typically remove the records from the table
+            }
+        }
+
+        // Change page
+        function changePage(direction) {
+            alert(`Navigating to ${direction} page`);
+        }
+
+        // Export history
+        function exportHistory() {
+            alert('Exporting history to CSV...');
+        }
+
+        // Print history
+        function printHistory() {
+            window.print();
+        }
+
+        // Download receipt
+        function downloadReceipt(recordId = null) {
+            if (recordId) {
+                alert(`Downloading receipt for record ${recordId}`);
+            } else {
+                alert('Downloading all receipts...');
+            }
+        }
+
+        // Share history
+        function shareHistory() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'DIU Parking History',
+                    text: 'Check out my parking history at DIU!',
+                    url: window.location.href
+                });
+            } else {
+                alert('History shared!');
+            }
+        }
+
+        // Contact support
+        function contactSupport() {
+            alert('Opening support chat...');
+        }
+
+        // Report issue
+        function reportIssue() {
+            alert('Opening issue report form...');
+        }
+
+        // View details
+        function viewDetails(recordId) {
+            const record = historyData.find(r => r.id === recordId);
+            if (record) {
+                alert(`Viewing details for parking session on ${record.date} at Zone ${record.zone} Spot ${record.spot}`);
+            }
+        }
+
+        // Share record
+        function shareRecord(recordId) {
+            alert(`Sharing record ${recordId}`);
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize page
+        initializeHistory();
+
+        // Select all checkbox event
+        document.getElementById('select-all').addEventListener('change', function() {
+            const recordCheckboxes = document.querySelectorAll('.record-checkbox');
+            recordCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+</body>
+</html>

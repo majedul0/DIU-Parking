@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Vehicle Parking - Settings</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://images.seeklogo.com/logo-png/36/2/daffodil-international-university-logo-png_seeklogo-361757.png" alt="DIU Logo" class="nav-diu-logo">
+                <div class="nav-logo-text">
+                    <span class="nav-title">DIU Vehicle Parking</span>
+                    <span class="nav-subtitle">Smart Parking System</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="find-parking.html" class="nav-link">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Find Parking
+                </a>
+                <a href="book-parking.html" class="nav-link">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Parking
+                </a>
+                <a href="history.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    History
+                </a>
+                <a href="payments.html" class="nav-link">
+                    <i class="fas fa-credit-card"></i>
+                    Payments
+                </a>
+                <a href="settings.html" class="nav-link active">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </div>
+            
+            <div class="nav-user">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40x40/1a4b84/ffffff?text=U" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sahik</span>
+                        <span class="user-role">Student</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1><i class="fas fa-cog"></i> Settings</h1>
+                <p>Manage your account, preferences, and security settings</p>
+            </div>
+        </div>
+
+        <!-- Settings Navigation -->
+        <div class="settings-nav">
+            <button class="nav-tab active" onclick="showSection('profile')">
+                <i class="fas fa-user"></i>
+                Profile
+            </button>
+            <button class="nav-tab" onclick="showSection('preferences')">
+                <i class="fas fa-sliders-h"></i>
+                Preferences
+            </button>
+            <button class="nav-tab" onclick="showSection('notifications')">
+                <i class="fas fa-bell"></i>
+                Notifications
+            </button>
+            <button class="nav-tab" onclick="showSection('security')">
+                <i class="fas fa-shield-alt"></i>
+                Security
+            </button>
+            <button class="nav-tab" onclick="showSection('vehicles')">
+                <i class="fas fa-car"></i>
+                Vehicles
+            </button>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="settings-section active" id="profile-section">
+            <div class="section-header">
+                <h3><i class="fas fa-user"></i> Profile Information</h3>
+                <button class="btn-primary" onclick="saveProfile()">
+                    <i class="fas fa-save"></i>
+                    Save Changes
+                </button>
+            </div>
+            
+            <div class="profile-form">
+                <div class="profile-avatar">
+                    <img src="https://via.placeholder.com/120x120/1a4b84/ffffff?text=JD" alt="Profile" id="profile-avatar">
+                    <div class="avatar-actions">
+                        <button class="btn-secondary" onclick="changeAvatar()">
+                            <i class="fas fa-camera"></i>
+                            Change Photo
+                        </button>
+                        <button class="btn-secondary" onclick="removeAvatar()">
+                            <i class="fas fa-trash"></i>
+                            Remove
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-fields">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" value="Sahik" id="first-name">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" value="" id="last-name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" value="sahik@diu.edu.bd" id="email" readonly>
+                        <small>Email cannot be changed</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" value="+880 1712-345678" id="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Student ID</label>
+                        <input type="text" value="0242220005101253" id="student-id" readonly>
+                        <small>Student ID cannot be changed</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Department</label>
+                        <input type="text" value="Computer Science & Engineering" id="department" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea id="address" rows="3">House #123, Road #4, Dhanmondi, Dhaka-1205</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferences Section -->
+        <div class="settings-section" id="preferences-section">
+            <div class="section-header">
+                <h3><i class="fas fa-sliders-h"></i> Preferences</h3>
+                <button class="btn-primary" onclick="savePreferences()">
+                    <i class="fas fa-save"></i>
+                    Save Preferences
+                </button>
+            </div>
+            
+            <div class="preferences-grid">
+                <div class="preference-card">
+                    <h4><i class="fas fa-language"></i> Language & Region</h4>
+                    <div class="preference-item">
+                        <label>Language</label>
+                        <select id="language">
+                            <option value="en">English</option>
+                            <option value="bn">বাংলা</option>
+                            <option value="ar">العربية</option>
+                        </select>
+                    </div>
+                    <div class="preference-item">
+                        <label>Time Zone</label>
+                        <select id="timezone">
+                            <option value="Asia/Dhaka" selected>Asia/Dhaka (GMT+6)</option>
+                            <option value="UTC">UTC (GMT+0)</option>
+                        </select>
+                    </div>
+                    <div class="preference-item">
+                        <label>Date Format</label>
+                        <select id="date-format">
+                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                            <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="preference-card">
+                    <h4><i class="fas fa-palette"></i> Appearance</h4>
+                    <div class="preference-item">
+                        <label>Theme</label>
+                        <select id="theme">
+                            <option value="light" selected>Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="auto">Auto (System)</option>
+                        </select>
+                    </div>
+                    <div class="preference-item">
+                        <label>Font Size</label>
+                        <select id="font-size">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                    <div class="preference-item">
+                        <label>Color Scheme</label>
+                        <select id="color-scheme">
+                            <option value="default" selected>DIU Default</option>
+                            <option value="high-contrast">High Contrast</option>
+                            <option value="colorblind">Colorblind Friendly</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="preference-card">
+                    <h4><i class="fas fa-map"></i> Parking Preferences</h4>
+                    <div class="preference-item">
+                        <label>Default Zone</label>
+                        <select id="default-zone">
+                            <option value="A" selected>Zone A - Main Campus</option>
+                            <option value="B">Zone B - Motorcycle</option>
+                            <option value="C">Zone C - Staff</option>
+                            <option value="D">Zone D - Visitor</option>
+                            <option value="E">Zone E - Library</option>
+                        </select>
+                    </div>
+                    <div class="preference-item">
+                        <label>Auto-extend Parking</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="auto-extend">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="preference-item">
+                        <label>Low Balance Alert</label>
+                        <input type="number" value="50" id="balance-alert" min="10" max="500">
+                        <small>Alert when balance falls below ৳</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Section -->
+        <div class="settings-section" id="notifications-section">
+            <div class="section-header">
+                <h3><i class="fas fa-bell"></i> Notification Settings</h3>
+                <button class="btn-primary" onclick="saveNotifications()">
+                    <i class="fas fa-save"></i>
+                    Save Settings
+                </button>
+            </div>
+            
+            <div class="notifications-grid">
+                <div class="notification-category">
+                    <h4><i class="fas fa-parking"></i> Parking Notifications</h4>
+                    <div class="notification-item">
+                        <label>Booking Confirmations</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Parking Reminders</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Time Extension Alerts</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Exit Reminders</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="notification-category">
+                    <h4><i class="fas fa-credit-card"></i> Payment Notifications</h4>
+                    <div class="notification-item">
+                        <label>Payment Confirmations</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Low Balance Alerts</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Transaction Receipts</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Payment Failures</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="notification-category">
+                    <h4><i class="fas fa-cog"></i> System Notifications</h4>
+                    <div class="notification-item">
+                        <label>System Updates</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Maintenance Alerts</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>Security Alerts</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="notification-item">
+                        <label>News & Updates</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Section -->
+        <div class="settings-section" id="security-section">
+            <div class="section-header">
+                <h3><i class="fas fa-shield-alt"></i> Security Settings</h3>
+            </div>
+            
+            <div class="security-grid">
+                <div class="security-card">
+                    <h4><i class="fas fa-key"></i> Change Password</h4>
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="current-password" placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="new-password" placeholder="Enter new password">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm new password">
+                    </div>
+                    <button class="btn-primary" onclick="changePassword()">
+                        <i class="fas fa-key"></i>
+                        Change Password
+                    </button>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-mobile-alt"></i> Two-Factor Authentication</h4>
+                    <div class="two-factor-status">
+                        <span class="status-badge inactive">Inactive</span>
+                        <p>Add an extra layer of security to your account</p>
+                    </div>
+                    <button class="btn-primary" onclick="enable2FA()">
+                        <i class="fas fa-shield-alt"></i>
+                        Enable 2FA
+                    </button>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-history"></i> Login History</h4>
+                    <div class="login-history">
+                        <div class="history-item">
+                            <span class="device">Chrome on Windows</span>
+                            <span class="location">Dhaka, Bangladesh</span>
+                            <span class="time">2 minutes ago</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="device">Mobile App</span>
+                            <span class="location">Dhaka, Bangladesh</span>
+                            <span class="time">1 hour ago</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="device">Safari on iPhone</span>
+                            <span class="location">Dhaka, Bangladesh</span>
+                            <span class="time">2 days ago</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="viewAllLogins()">
+                        <i class="fas fa-eye"></i>
+                        View All
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicles Section -->
+        <div class="settings-section" id="vehicles-section">
+            <div class="section-header">
+                <h3><i class="fas fa-car"></i> Vehicle Management</h3>
+                <button class="btn-primary" onclick="addVehicle()">
+                    <i class="fas fa-plus"></i>
+                    Add Vehicle
+                </button>
+            </div>
+            
+            <div class="vehicles-grid" id="vehicles-grid">
+                <!-- Vehicles will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 DIU Vehicle Parking System. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample vehicle data
+        const vehicleData = [
+            {
+                id: 1,
+                number: 'DH-5678-9012',
+                type: 'Car',
+                model: 'Toyota Corolla',
+                color: 'White',
+                isDefault: true
+            },
+            {
+                id: 2,
+                number: 'DH-8765-4321',
+                type: 'Motorcycle',
+                model: 'Honda CG125',
+                color: 'Red',
+                isDefault: false
+            }
+        ];
+
+        // Initialize vehicles
+        function initializeVehicles() {
+            const vehiclesGrid = document.getElementById('vehicles-grid');
+            vehiclesGrid.innerHTML = '';
+            
+            vehicleData.forEach(vehicle => {
+                const vehicleCard = createVehicleCard(vehicle);
+                vehiclesGrid.appendChild(vehicleCard);
+            });
+        }
+
+        // Create vehicle card
+        function createVehicleCard(vehicle) {
+            const card = document.createElement('div');
+            card.className = 'vehicle-card';
+            card.innerHTML = `
+                <div class="vehicle-header">
+                    <h4>${vehicle.number}</h4>
+                    ${vehicle.isDefault ? '<span class="default-badge">Default</span>' : ''}
+                </div>
+                <div class="vehicle-details">
+                    <span><i class="fas fa-car"></i> ${vehicle.type}</span>
+                    <span><i class="fas fa-info-circle"></i> ${vehicle.model}</span>
+                    <span><i class="fas fa-palette"></i> ${vehicle.color}</span>
+                </div>
+                <div class="vehicle-actions">
+                    <button class="btn-secondary" onclick="editVehicle(${vehicle.id})">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </button>
+                    <button class="btn-secondary" onclick="setDefaultVehicle(${vehicle.id})" ${vehicle.isDefault ? 'disabled' : ''}>
+                        <i class="fas fa-star"></i>
+                        Set Default
+                    </button>
+                    <button class="btn-secondary" onclick="deleteVehicle(${vehicle.id})">
+                        <i class="fas fa-trash"></i>
+                        Delete
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Show section
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.settings-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`${sectionName}-section`).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Save profile
+        function saveProfile() {
+            alert('Profile saved successfully!');
+        }
+
+        // Save preferences
+        function savePreferences() {
+            alert('Preferences saved successfully!');
+        }
+
+        // Save notifications
+        function saveNotifications() {
+            alert('Notification settings saved successfully!');
+        }
+
+        // Change password
+        function changePassword() {
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Please fill in all password fields');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                alert('Password must be at least 8 characters long');
+                return;
+            }
+            
+            alert('Password changed successfully!');
+            document.getElementById('current-password').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+        }
+
+        // Enable 2FA
+        function enable2FA() {
+            alert('Opening 2FA setup...');
+        }
+
+        // View all logins
+        function viewAllLogins() {
+            alert('Opening complete login history...');
+        }
+
+        // Add vehicle
+        function addVehicle() {
+            alert('Opening add vehicle form...');
+        }
+
+        // Edit vehicle
+        function editVehicle(id) {
+            alert(`Editing vehicle ${id}`);
+        }
+
+        // Set default vehicle
+        function setDefaultVehicle(id) {
+            if (confirm('Set this vehicle as default?')) {
+                alert('Default vehicle updated!');
+                // Here you would typically update the vehicle data
+            }
+        }
+
+        // Delete vehicle
+        function deleteVehicle(id) {
+            if (confirm('Are you sure you want to delete this vehicle?')) {
+                alert('Vehicle deleted successfully!');
+                // Here you would typically remove the vehicle from the data
+            }
+        }
+
+        // Change avatar
+        function changeAvatar() {
+            alert('Opening file picker for new avatar...');
+        }
+
+        // Remove avatar
+        function removeAvatar() {
+            if (confirm('Remove profile photo?')) {
+                document.getElementById('profile-avatar').src = 'https://via.placeholder.com/120x120/1a4b84/ffffff?text=U';
+                alert('Profile photo removed!');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize page
+        initializeVehicles();
+    </script>
+</body>
+</html>

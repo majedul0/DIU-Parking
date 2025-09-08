@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIU Vehicle Parking - Payments</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://images.seeklogo.com/logo-png/36/2/daffodil-international-university-logo-png_seeklogo-361757.png" alt="DIU Logo" class="nav-diu-logo">
+                <div class="nav-logo-text">
+                    <span class="nav-title">DIU Vehicle Parking</span>
+                    <span class="nav-subtitle">Smart Parking System</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="find-parking.html" class="nav-link">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Find Parking
+                </a>
+                <a href="book-parking.html" class="nav-link">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Parking
+                </a>
+                <a href="history.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    History
+                </a>
+                <a href="payments.html" class="nav-link active">
+                    <i class="fas fa-credit-card"></i>
+                    Payments
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </div>
+            
+            <div class="nav-user">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/40x40/1a4b84/ffffff?text=U" alt="User" class="user-avatar">
+                    <div class="user-details">
+                        <span class="user-name">Sahik</span>
+                        <span class="user-role">Student</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1><i class="fas fa-credit-card"></i> Payments & Wallet</h1>
+                <p>Manage your wallet, view transactions, and add funds</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-primary" onclick="addFunds()">
+                    <i class="fas fa-plus"></i>
+                    Add Funds
+                </button>
+            </div>
+        </div>
+
+        <!-- Wallet Overview -->
+        <div class="wallet-overview">
+            <div class="wallet-card">
+                <div class="wallet-header">
+                    <h3><i class="fas fa-wallet"></i> Current Balance</h3>
+                                            <span class="balance-amount">৳150</span>
+                </div>
+                <div class="wallet-details">
+                    <div class="detail-item">
+                        <span>Last Added:</span>
+                        <span>৳50 on Jan 15, 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Last Used:</span>
+                        <span>৳20 on Jan 15, 2024</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>Total Added:</span>
+                        <span>৳2,500 this year</span>
+                    </div>
+                </div>
+                <div class="wallet-actions">
+                    <button class="btn-secondary" onclick="addFunds()">
+                        <i class="fas fa-plus"></i>
+                        Add Funds
+                    </button>
+                    <button class="btn-secondary" onclick="withdrawFunds()">
+                        <i class="fas fa-minus"></i>
+                        Withdraw
+                    </button>
+                </div>
+            </div>
+            
+            <div class="wallet-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Added</h3>
+                        <p>৳2,500</p>
+                        <span>This year</span>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Spent</h3>
+                        <p>৳2,350</p>
+                        <span>This year</span>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Transactions</h3>
+                        <p>89</p>
+                        <span>This year</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="payment-methods-section">
+            <div class="section-header">
+                <h3><i class="fas fa-credit-card"></i> Payment Methods</h3>
+                <button class="btn-secondary" onclick="addPaymentMethod()">
+                    <i class="fas fa-plus"></i>
+                    Add New
+                </button>
+            </div>
+            
+            <div class="payment-methods-grid">
+                <div class="payment-method active">
+                    <div class="method-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="method-info">
+                        <h4>Wallet Balance</h4>
+                        <p>৳150 available</p>
+                    </div>
+                    <div class="method-status">
+                        <span class="status-badge active">Default</span>
+                    </div>
+                </div>
+                
+                <div class="payment-method">
+                    <div class="method-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="method-info">
+                        <h4>Credit Card</h4>
+                        <p>**** **** **** 1234</p>
+                    </div>
+                    <div class="method-status">
+                        <span class="status-badge">Active</span>
+                    </div>
+                </div>
+                
+                <div class="payment-method">
+                    <div class="method-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="method-info">
+                        <h4>Bank Transfer</h4>
+                        <p>HDFC Bank</p>
+                    </div>
+                    <div class="method-status">
+                        <span class="status-badge">Active</span>
+                    </div>
+                </div>
+                
+                <div class="payment-method">
+                    <div class="method-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="method-info">
+                        <h4>UPI</h4>
+                        <p>john.doe@upi</p>
+                    </div>
+                    <div class="method-status">
+                        <span class="status-badge">Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="transactions-section">
+            <div class="section-header">
+                <h3><i class="fas fa-list"></i> Recent Transactions</h3>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="exportTransactions()">
+                        <i class="fas fa-download"></i>
+                        Export
+                    </button>
+                    <button class="btn-secondary" onclick="viewAllTransactions()">
+                        <i class="fas fa-eye"></i>
+                        View All
+                    </button>
+                </div>
+            </div>
+            
+            <div class="transactions-list" id="transactions-list">
+                <!-- Transactions will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions-section">
+            <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+            <div class="quick-actions-grid">
+                <button class="quick-action-btn" onclick="addFunds()">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Funds</span>
+                </button>
+                <button class="quick-action-btn" onclick="setAutoRecharge()">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Auto Recharge</span>
+                </button>
+                <button class="quick-action-btn" onclick="downloadStatement()">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Download Statement</span>
+                </button>
+                <button class="quick-action-btn" onclick="contactSupport()">
+                    <i class="fas fa-headset"></i>
+                    <span>Payment Support</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 DIU Vehicle Parking System. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample transaction data
+        const transactionData = [
+            {
+                id: 1,
+                type: 'credit',
+                amount: 50,
+                description: 'Added funds via Credit Card',
+                date: '2024-01-15',
+                time: '14:30',
+                status: 'completed',
+                method: 'Credit Card'
+            },
+            {
+                id: 2,
+                type: 'debit',
+                amount: 20,
+                description: 'Parking fee - Zone A Spot 12',
+                date: '2024-01-15',
+                time: '09:30',
+                status: 'completed',
+                method: 'Wallet'
+            },
+            {
+                id: 3,
+                type: 'credit',
+                amount: 100,
+                description: 'Added funds via UPI',
+                date: '2024-01-14',
+                time: '16:45',
+                status: 'completed',
+                method: 'UPI'
+            },
+            {
+                id: 4,
+                type: 'debit',
+                amount: 42,
+                description: 'Parking fee - Zone B Spot 5',
+                date: '2024-01-14',
+                time: '18:30',
+                status: 'completed',
+                method: 'Wallet'
+            },
+            {
+                id: 5,
+                type: 'credit',
+                amount: 200,
+                description: 'Added funds via Bank Transfer',
+                date: '2024-01-13',
+                time: '11:20',
+                status: 'completed',
+                method: 'Bank Transfer'
+            },
+            {
+                id: 6,
+                type: 'debit',
+                amount: 50,
+                description: 'Parking fee - Zone A Spot 8',
+                date: '2024-01-13',
+                time: '12:45',
+                status: 'completed',
+                method: 'Wallet'
+            }
+        ];
+
+        // Initialize transactions
+        function initializeTransactions() {
+            const transactionsList = document.getElementById('transactions-list');
+            transactionsList.innerHTML = '';
+            
+            transactionData.forEach(transaction => {
+                const transactionItem = createTransactionItem(transaction);
+                transactionsList.appendChild(transactionItem);
+            });
+        }
+
+        // Create transaction item
+        function createTransactionItem(transaction) {
+            const item = document.createElement('div');
+            item.className = `transaction-item ${transaction.type}`;
+            item.innerHTML = `
+                <div class="transaction-icon">
+                    <i class="fas fa-${transaction.type === 'credit' ? 'arrow-up' : 'arrow-down'}"></i>
+                </div>
+                <div class="transaction-content">
+                    <div class="transaction-header">
+                        <h4>${transaction.description}</h4>
+                        <span class="amount ${transaction.type}">
+                            ${transaction.type === 'credit' ? '+' : '-'}৳${transaction.amount}
+                        </span>
+                    </div>
+                    <div class="transaction-details">
+                        <span><i class="fas fa-calendar"></i> ${formatDate(transaction.date)}</span>
+                        <span><i class="fas fa-clock"></i> ${transaction.time}</span>
+                        <span><i class="fas fa-credit-card"></i> ${transaction.method}</span>
+                    </div>
+                </div>
+                <div class="transaction-status">
+                    <span class="status-badge ${transaction.status}">${transaction.status}</span>
+                </div>
+            `;
+            return item;
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // Add funds
+        function addFunds() {
+            const amount = prompt('Enter amount to add (৳):');
+            if (amount && !isNaN(amount)) {
+                if (confirm(`Add ৳${amount} to your wallet?`)) {
+                    alert(`৳${amount} added successfully! Your new balance is ৳${parseInt(amount) + 150}`);
+                    // Here you would typically update the wallet balance
+                }
+            }
+        }
+
+        // Withdraw funds
+        function withdrawFunds() {
+            const amount = prompt('Enter amount to withdraw (৳):');
+            if (amount && !isNaN(amount)) {
+                if (parseInt(amount) > 150) {
+                    alert('Insufficient balance!');
+                    return;
+                }
+                if (confirm(`Withdraw ৳${amount} from your wallet?`)) {
+                    alert(`৳${amount} withdrawn successfully! Your new balance is ৳${150 - parseInt(amount)}`);
+                    // Here you would typically update the wallet balance
+                }
+            }
+        }
+
+        // Add payment method
+        function addPaymentMethod() {
+            alert('Opening payment method form...');
+        }
+
+        // Export transactions
+        function exportTransactions() {
+            alert('Exporting transactions to CSV...');
+        }
+
+        // View all transactions
+        function viewAllTransactions() {
+            alert('Opening full transaction history...');
+        }
+
+        // Set auto recharge
+        function setAutoRecharge() {
+            alert('Opening auto recharge settings...');
+        }
+
+        // Download statement
+        function downloadStatement() {
+            alert('Downloading monthly statement...');
+        }
+
+        // Contact support
+        function contactSupport() {
+            alert('Opening support chat...');
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize page
+        initializeTransactions();
+    </script>
+</body>
+</html>
